@@ -9,13 +9,14 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var alarmTime: UITextField!
+    @IBOutlet weak var alarmMusic: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         // 目覚まし時計のアプリ
     }
-
 
 }
 
