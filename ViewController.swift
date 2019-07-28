@@ -9,14 +9,15 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    @IBOutlet weak var alarmTime: UITextField!
-    @IBOutlet weak var alarmMusic: UITextField!
+
+    @IBOutlet weak var alarmText: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         // 目覚まし時計のアプリ
     }
-
+    // 設定情報を保存するメソッド
+    @IBAction func saveInformation(_ sender: Any) {
+    }
+    // バックグラウンドでも動作する方法を調査する
 }
-
