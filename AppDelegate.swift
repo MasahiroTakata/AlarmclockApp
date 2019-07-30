@@ -7,12 +7,12 @@
 //
 
 import UIKit
+import UserNotifications // 通知する為のフレームワーク
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -29,11 +29,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         //　通知設定に必要なクラスをインスタンス化
-        // ↓↓エラー出てる↓↓
         let trigger: UNNotificationTrigger
         let content = UNMutableNotificationContent()
         var notificationTime = DateComponents()
-        
+        // トリガー設定
+        notificationTime.hour = 12
+        notificationTime.minute = 0
+        trigger = UNCalendarNotificationTrigger(dateMatching: notificationTime, repeats: false)
+        // 通知内容の設定
+        content.title = ""
+        content.body = "テストです！"
+        // content.sound = UNNotificationSound.default()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
