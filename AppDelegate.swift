@@ -29,13 +29,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         //　通知設定に必要なクラスをインスタンス化
-        let trigger: UNNotificationTrigger
+        var trigger: UNNotificationTrigger
         let content = UNMutableNotificationContent()
         var notificationTime = DateComponents()
         // トリガー設定
         notificationTime.hour = 12
         notificationTime.minute = 0
         trigger = UNCalendarNotificationTrigger(dateMatching: notificationTime, repeats: false)
+        // 設定したタイミングを起点として１分後に通知したい場合
+        trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: false)
         // 通知内容の設定
         content.title = ""
         content.body = "テストです！"
