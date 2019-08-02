@@ -10,7 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var alarmText: UITextField!
+
+    @IBOutlet weak var alarmTime: UITextField!
+    @IBOutlet weak var alarmMusic: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
