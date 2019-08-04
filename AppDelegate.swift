@@ -26,8 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // アプリケーションがバックグラウンドへ遷移した場合の処理
     func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         //　通知設定に必要なクラスをインスタンス化
         var trigger: UNNotificationTrigger
         let content = UNMutableNotificationContent()
@@ -42,6 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         content.title = ""
         content.body = "テストです！"
         // content.sound = UNNotificationSound.default()
+        // 通知スタイルを指定
+        let request = UNNotificationRequest(identifier: "uuid", content: content, trigger: trigger)
+        // 通知をセット
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
