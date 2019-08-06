@@ -29,6 +29,8 @@ class ViewController: UIViewController {
     }
     // 設定情報を保存するメソッド
     @IBAction func saveInformation(_ sender: Any) {
+        // 選択曲
+        // 指定した時間
     }
     // バックグラウンドでも動作する方法を調査する
 }
