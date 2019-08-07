@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let content = UNMutableNotificationContent()
         var notificationTime = DateComponents()
         // トリガー設定
-        notificationTime.hour = 12
+        notificationTime.hour = 0
         notificationTime.minute = 0
         trigger = UNCalendarNotificationTrigger(dateMatching: notificationTime, repeats: false)
         // 設定したタイミングを起点として１分後に通知したい場合
