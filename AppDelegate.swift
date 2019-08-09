@@ -35,7 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notificationTime.minute = 0
         trigger = UNCalendarNotificationTrigger(dateMatching: notificationTime, repeats: false)
         // 設定したタイミングを起点として１分後に通知したい場合
-        trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: false)
+        // アプリがバックグラウンドになってから、通知するタイミングを指定（下記の場合だと１分おき（repeatsをtrueにした場合)）
+        trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
+        print("バックグラウンドになりました")
         // 通知内容の設定
         content.title = ""
         content.body = "テストです！"
