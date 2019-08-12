@@ -29,22 +29,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //　通知設定に必要なクラスをインスタンス化
         var trigger: UNNotificationTrigger
         let content = UNMutableNotificationContent()
+        let notification = UILocalNotification()
         var notificationTime = DateComponents()
         // トリガー設定
         notificationTime.hour = 0
         notificationTime.minute = 0
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH"
+        fireDate.hour = Int(formatter.string(from: Date()))!
+        formatter.dateFormat = "mm"
+        fireDate.minute = Int(formatter.string(from: Date()))!
+        formatter.dateFormat = "ss"
+        fireDate.second = Int(formatter.string(from: Date()))!
+        
         trigger = UNCalendarNotificationTrigger(dateMatching: notificationTime, repeats: false)
-        // 設定したタイミングを起点として１分後に通知したい場合
         // アプリがバックグラウンドになってから、通知するタイミングを指定（下記の場合だと１分おき（repeatsをtrueにした場合)）
-        trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
+        // 経過時間で通知を表示させる場合（この場合は60秒後に通知を表示させる設定）
+        trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: false)
         print("バックグラウンドになりました")
         // 通知内容の設定
         content.title = ""
         content.body = "テストです！"
+        
         // content.sound = UNNotificationSound.default()
         // 通知スタイルを指定
         let request = UNNotificationRequest(identifier: "uuid", content: content, trigger: trigger)
-        // 通知をセット
+        // 通知をセット(登録)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 
