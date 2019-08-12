@@ -13,6 +13,8 @@ import UserNotifications // 通知する為のフレームワーク
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    @IBOutlet weak var hour: UITextField!
+    @IBOutlet weak var minute: UITextField!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -29,29 +31,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //　通知設定に必要なクラスをインスタンス化
         var trigger: UNNotificationTrigger
         let content = UNMutableNotificationContent()
-        let notification = UILocalNotification()
         var notificationTime = DateComponents()
-        // トリガー設定
-        notificationTime.hour = 0
-        notificationTime.minute = 0
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH"
-        fireDate.hour = Int(formatter.string(from: Date()))!
-        formatter.dateFormat = "mm"
-        fireDate.minute = Int(formatter.string(from: Date()))!
-        formatter.dateFormat = "ss"
-        fireDate.second = Int(formatter.string(from: Date()))!
-        
+        // 時間を設定する
+        notificationTime.hour = Int(hour.text!)
+        notificationTime.minute = Int(minute.text!)
+
         trigger = UNCalendarNotificationTrigger(dateMatching: notificationTime, repeats: false)
         // アプリがバックグラウンドになってから、通知するタイミングを指定（下記の場合だと１分おき（repeatsをtrueにした場合)）
         // 経過時間で通知を表示させる場合（この場合は60秒後に通知を表示させる設定）
-        trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: false)
-        print("バックグラウンドになりました")
+        //trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: false)
+        print("バックグラウンドになりました" + "hour:" + hour.text! + "minute:" + minute.text!)
         // 通知内容の設定
         content.title = ""
         content.body = "テストです！"
-        
+        // 通知音の設定
         // content.sound = UNNotificationSound.default()
         // 通知スタイルを指定
         let request = UNNotificationRequest(identifier: "uuid", content: content, trigger: trigger)

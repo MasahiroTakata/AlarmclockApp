@@ -10,8 +10,9 @@ import UIKit
 import UserNotifications // 通知の為のフレームワーク
 
 class ViewController: UIViewController {
-    @IBOutlet weak var alarmTime: UITextField!
-    @IBOutlet weak var alarmMusic: UITextField!
+    @IBOutlet weak var hour: UITextField!
+    @IBOutlet weak var minute: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
