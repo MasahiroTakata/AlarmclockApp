@@ -32,15 +32,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var trigger: UNNotificationTrigger
         let content = UNMutableNotificationContent()
         var notificationTime = DateComponents()
-        // 時間を設定する
-        notificationTime.hour = Int(hour.text!)
-        notificationTime.minute = Int(minute.text!)
+        let userDefaults = UserDefaults.standard
+
+        if let hour = userDefaults.string(forKey: "hour") {
+            notificationTime.hour = Int(hour)
+        }
+        
+        if let minute = userDefaults.string(forKey: "minute") {
+            notificationTime.minute = Int(minute)
+        }
 
         trigger = UNCalendarNotificationTrigger(dateMatching: notificationTime, repeats: false)
-        // アプリがバックグラウンドになってから、通知するタイミングを指定（下記の場合だと１分おき（repeatsをtrueにした場合)）
-        // 経過時間で通知を表示させる場合（この場合は60秒後に通知を表示させる設定）
-        //trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: false)
-        print("バックグラウンドになりました" + "hour:" + hour.text! + "minute:" + minute.text!)
+        //print("バックグラウンドになりました" + "hour:" + hour.text! + "minute:" + minute.text!)
         // 通知内容の設定
         content.title = ""
         content.body = "テストです！"
@@ -64,6 +67,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
 }
-

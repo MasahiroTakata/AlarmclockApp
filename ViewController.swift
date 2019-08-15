@@ -27,11 +27,18 @@ class ViewController: UIViewController {
                 print("通知拒否")
             }
         }
+        
+        hour.keyboardType = UIKeyboardType.numberPad
+        minute.keyboardType = UIKeyboardType.numberPad
     }
     // 設定情報を保存するメソッド
     @IBAction func saveInformation(_ sender: Any) {
-        // 選択曲を取得
-        // 指定した時間を取得
+        // 選択曲を取得(mp3しかとれないかも？？)
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(hour.text!, forKey: "hour")
+        userDefaults.set(minute.text!, forKey: "minute")
+        // UserDefaultsへの値の保存を明示的に行う
+        userDefaults.synchronize()
+        print("保存しました。")
     }
-    // バックグラウンドでも動作する方法を調査する
 }
