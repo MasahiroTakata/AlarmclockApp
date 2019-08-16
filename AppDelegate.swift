@@ -43,12 +43,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         trigger = UNCalendarNotificationTrigger(dateMatching: notificationTime, repeats: false)
-        //print("バックグラウンドになりました" + "hour:" + hour.text! + "minute:" + minute.text!)
         // 通知内容の設定
         content.title = ""
-        content.body = "テストです！"
+        content.body = "時間です！！"
         // 通知音の設定
-        // content.sound = UNNotificationSound.default()
+        content.sound = UNNotificationSound.default
+        // content.sound = UNNotificationSound(named:"xxxx.mp3")
         // 通知スタイルを指定
         let request = UNNotificationRequest(identifier: "uuid", content: content, trigger: trigger)
         // 通知をセット(登録)

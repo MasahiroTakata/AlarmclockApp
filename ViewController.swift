@@ -33,12 +33,14 @@ class ViewController: UIViewController {
     }
     // 設定情報を保存するメソッド
     @IBAction func saveInformation(_ sender: Any) {
-        // 選択曲を取得(mp3しかとれないかも？？)
         let userDefaults = UserDefaults.standard
         userDefaults.set(hour.text!, forKey: "hour")
         userDefaults.set(minute.text!, forKey: "minute")
         // UserDefaultsへの値の保存を明示的に行う
         userDefaults.synchronize()
-        print("保存しました。")
+        let alert = UIAlertController(title: "メッセージ", message: "設定しました。", preferredStyle: UIAlertController.Style.alert)
+        let okayButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil)
+        alert.addAction(okayButton)
+        present(alert, animated: true, completion: nil)
     }
 }
