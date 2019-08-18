@@ -12,6 +12,7 @@ import UserNotifications // 通知の為のフレームワーク
 class ViewController: UIViewController {
     @IBOutlet weak var hour: UITextField!
     @IBOutlet weak var minute: UITextField!
+    @IBOutlet weak var getDate: UIDatePicker!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,8 @@ class ViewController: UIViewController {
         let userDefaults = UserDefaults.standard
         userDefaults.set(hour.text!, forKey: "hour")
         userDefaults.set(minute.text!, forKey: "minute")
+        print(getDate.date)
+        // getDateクラスで取得した日付を取得する
         // UserDefaultsへの値の保存を明示的に行う
         userDefaults.synchronize()
         let alert = UIAlertController(title: "メッセージ", message: "設定しました。", preferredStyle: UIAlertController.Style.alert)
