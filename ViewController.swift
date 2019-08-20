@@ -37,6 +37,7 @@ class ViewController: UIViewController {
         let userDefaults = UserDefaults.standard
         userDefaults.set(hour.text!, forKey: "hour")
         userDefaults.set(minute.text!, forKey: "minute")
+        // 現状は時間がずれている。
         print(getDate.date)
         // getDateクラスで取得した日付を取得する
         // UserDefaultsへの値の保存を明示的に行う
