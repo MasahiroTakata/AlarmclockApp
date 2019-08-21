@@ -39,6 +39,8 @@ class ViewController: UIViewController {
         userDefaults.set(minute.text!, forKey: "minute")
         // 現状は時間がずれている。
         print(getDate.date)
+        let date = Date()
+        print(date)
         // getDateクラスで取得した日付を取得する
         // UserDefaultsへの値の保存を明示的に行う
         userDefaults.synchronize()
@@ -46,5 +48,19 @@ class ViewController: UIViewController {
         let okayButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil)
         alert.addAction(okayButton)
         present(alert, animated: true, completion: nil)
+    }
+    
+    // 今ここでエラー
+    extension Date {
+        func toStringWithCurrentLocale() -> String {
+            
+            let formatter = DateFormatter()
+            formatter.timeZone = TimeZone.current
+            formatter.locale = Locale.current
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            
+            return formatter.string(from: self)
+        }
+        
     }
 }
