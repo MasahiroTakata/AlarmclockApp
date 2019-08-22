@@ -9,6 +9,16 @@
 import UIKit
 import UserNotifications // 通知の為のフレームワーク
 
+extension (UIDatePicker) {
+    func test(){
+        datePickerMode = UIDatePicker.Mode.dateAndTime
+        timeZone = TimeZone.current
+        locale = Locale.current
+        print(date)
+        // let formatter = DateFormatter()
+    }
+}
+
 class ViewController: UIViewController {
     @IBOutlet weak var hour: UITextField!
     @IBOutlet weak var minute: UITextField!
@@ -32,15 +42,14 @@ class ViewController: UIViewController {
         hour.keyboardType = UIKeyboardType.numberPad
         minute.keyboardType = UIKeyboardType.numberPad
     }
+
     // 設定情報を保存するメソッド
     @IBAction func saveInformation(_ sender: Any) {
         let userDefaults = UserDefaults.standard
         userDefaults.set(hour.text!, forKey: "hour")
         userDefaults.set(minute.text!, forKey: "minute")
         // 現状は時間がずれている。
-        print(getDate.date)
-        let date = Date()
-        print(date)
+        getDate.test()
         // getDateクラスで取得した日付を取得する
         // UserDefaultsへの値の保存を明示的に行う
         userDefaults.synchronize()
@@ -49,18 +58,5 @@ class ViewController: UIViewController {
         alert.addAction(okayButton)
         present(alert, animated: true, completion: nil)
     }
-    
-    // 今ここでエラー
-    extension Date {
-        func toStringWithCurrentLocale() -> String {
-            
-            let formatter = DateFormatter()
-            formatter.timeZone = TimeZone.current
-            formatter.locale = Locale.current
-            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            
-            return formatter.string(from: self)
-        }
-        
-    }
+
 }
