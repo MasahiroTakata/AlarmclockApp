@@ -13,8 +13,7 @@ import UserNotifications // 通知する為のフレームワーク
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    @IBOutlet weak var hour: UITextField!
-    @IBOutlet weak var minute: UITextField!
+    @IBOutlet weak var getDate: UIDatePicker!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -37,11 +36,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let hour = userDefaults.string(forKey: "hour") {
             notificationTime.hour = Int(hour)
         }
-        
+
         if let minute = userDefaults.string(forKey: "minute") {
             notificationTime.minute = Int(minute)
         }
 
+        print("時間：" , notificationTime.hour!)
+        print("分：" , notificationTime.minute!)
         trigger = UNCalendarNotificationTrigger(dateMatching: notificationTime, repeats: false)
         // 通知内容の設定
         content.title = ""

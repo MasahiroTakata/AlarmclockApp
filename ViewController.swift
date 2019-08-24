@@ -11,22 +11,27 @@ import UserNotifications // 通知の為のフレームワーク
 
 extension (UIDatePicker) {
     func test(){
-        datePickerMode = UIDatePicker.Mode.dateAndTime
-        timeZone = TimeZone.current
-        locale = Locale.current
-        print(date)
-        // let formatter = DateFormatter()
+//        datePickerMode = UIDatePicker.Mode.dateAndTime
+//        timeZone = TimeZone.current
+//        locale = Locale.current
+        let hour = DateFormatter()
+        let minute = DateFormatter()
+        let userDefaults : UserDefaults? = UserDefaults.standard
+        hour.dateFormat = "HH"
+        minute.dateFormat = "mm"
+        print("時間：" , "\(hour.string(from: date))")
+        print("分：" , "\(minute.string(from: date))")
+        userDefaults!.set(hour.string(from: date), forKey: "hour")
+        userDefaults!.set(minute.string(from: date), forKey: "minute")
     }
 }
 
 class ViewController: UIViewController {
-    @IBOutlet weak var hour: UITextField!
-    @IBOutlet weak var minute: UITextField!
     @IBOutlet weak var getDate: UIDatePicker!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound, .badge]) {
             (granted, error) in
@@ -39,19 +44,13 @@ class ViewController: UIViewController {
             }
         }
         
-        hour.keyboardType = UIKeyboardType.numberPad
-        minute.keyboardType = UIKeyboardType.numberPad
     }
 
     // 設定情報を保存するメソッド
     @IBAction func saveInformation(_ sender: Any) {
         let userDefaults = UserDefaults.standard
-        userDefaults.set(hour.text!, forKey: "hour")
-        userDefaults.set(minute.text!, forKey: "minute")
-        // 現状は時間がずれている。
+        // 現状は時間がずれている。 このメソッドで時間をUserDefaultで保存する。
         getDate.test()
-        // getDateクラスで取得した日付を取得する
-        // UserDefaultsへの値の保存を明示的に行う
         userDefaults.synchronize()
         let alert = UIAlertController(title: "メッセージ", message: "設定しました。", preferredStyle: UIAlertController.Style.alert)
         let okayButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil)
