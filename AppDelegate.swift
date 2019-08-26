@@ -48,7 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         content.title = ""
         content.body = "時間です！！"
         // 通知音の設定
-        // content.sound = UNNotificationSound.default
         content.sound = UNNotificationSound(named:UNNotificationSoundName(rawValue: "b1-001_alarm-clock_01.mp3"))
         // 通知スタイルを指定
         let request = UNNotificationRequest(identifier: "uuid", content: content, trigger: trigger)
