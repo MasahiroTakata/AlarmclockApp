@@ -9,19 +9,11 @@
 import UIKit
 import UserNotifications // 通知の為のフレームワーク
 
-extension (UIDatePicker) {
-    func test(){
-        let hour = DateFormatter()
-        let minute = DateFormatter()
-        let userDefaults : UserDefaults? = UserDefaults.standard
-        hour.dateFormat = "HH"
-        minute.dateFormat = "mm"
-//        print("時間：" , "\(hour.string(from: date))")
-//        print("分：" , "\(minute.string(from: date))")
-        userDefaults!.set(hour.string(from: date), forKey: "hour")
-        userDefaults!.set(minute.string(from: date), forKey: "minute")
-    }
-}
+// クラスの拡張
+//extension (UIDatePicker) {
+//    func test(){
+//    }
+//}
 
 class ViewController: UIViewController {
     @IBOutlet weak var getDate: UIDatePicker!
@@ -35,15 +27,21 @@ class ViewController: UIViewController {
             if granted {
                 let center = UNUserNotificationCenter.current()
                 center.delegate = self as? UNUserNotificationCenterDelegate
-            } else {
             }
         }
-        
     }
 
     // 設定情報を保存するメソッド
     @IBAction func saveInformation(_ sender: Any) {
-        getDate.test()
+        let hour = DateFormatter()
+        let minute = DateFormatter()
+        let userDefaults : UserDefaults? = UserDefaults.standard
+        hour.dateFormat = "HH"
+        minute.dateFormat = "mm"
+        //        print("時間：" , "\(hour.string(from: date))")
+        //        print("分：" , "\(minute.string(from: date))")
+        userDefaults!.set(hour.string(from: getDate.date), forKey: "hour")
+        userDefaults!.set(minute.string(from: getDate.date), forKey: "minute")
         let alert = UIAlertController(title: "メッセージ", message: "設定しました。", preferredStyle: UIAlertController.Style.alert)
         let okayButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil)
         alert.addAction(okayButton)

@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var notificationTime = DateComponents()
         let userDefaults = UserDefaults.standard
 
+        // userDefaultsで保存した値の取得
         if let hour = userDefaults.string(forKey: "hour") {
             notificationTime.hour = Int(hour)
         }
@@ -41,8 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             notificationTime.minute = Int(minute)
         }
 
-        print("時間：" , notificationTime.hour!)
-        print("分：" , notificationTime.minute!)
         trigger = UNCalendarNotificationTrigger(dateMatching: notificationTime, repeats: false)
         // 通知内容の設定
         content.title = ""
