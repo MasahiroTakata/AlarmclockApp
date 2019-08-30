@@ -17,7 +17,9 @@ import UserNotifications // 通知の為のフレームワーク
 
 class ViewController: UIViewController {
     @IBOutlet weak var getDate: UIDatePicker!
-    
+    @IBOutlet weak var willContent: UITextField!
+    @IBOutlet weak var schedule: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // 通知の許可
