@@ -35,19 +35,29 @@ class ViewController: UIViewController {
 
     // 設定情報を保存するメソッド
     @IBAction func saveInformation(_ sender: Any) {
-        let hour = DateFormatter()
-        let minute = DateFormatter()
-        let userDefaults : UserDefaults? = UserDefaults.standard
-        hour.dateFormat = "HH"
-        minute.dateFormat = "mm"
-        //        print("時間：" , "\(hour.string(from: date))")
-        //        print("分：" , "\(minute.string(from: date))")
-        userDefaults!.set(hour.string(from: getDate.date), forKey: "hour")
-        userDefaults!.set(minute.string(from: getDate.date), forKey: "minute")
-        let alert = UIAlertController(title: "メッセージ", message: "設定しました。", preferredStyle: UIAlertController.Style.alert)
-        let okayButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil)
-        alert.addAction(okayButton)
-        present(alert, animated: true, completion: nil)
+        // nilを許容する為の変数を用意（テキスト値の空判定をする為）
+        var textValue:String? = nil
+        textValue = String(willContent.text!)
+        if (textValue == "") {
+            let alert = UIAlertController(title: "メッセージ", message: schedule.text! + "が未入力です。", preferredStyle: UIAlertController.Style.alert)
+            let okayButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil)
+            alert.addAction(okayButton)
+            present(alert, animated: true, completion: nil)
+        } else {
+            let hour = DateFormatter()
+            let minute = DateFormatter()
+            let userDefaults : UserDefaults? = UserDefaults.standard
+            hour.dateFormat = "HH"
+            minute.dateFormat = "mm"
+            //        print("時間：" , "\(hour.string(from: date))")
+            //        print("分：" , "\(minute.string(from: date))")
+            userDefaults!.set(hour.string(from: getDate.date), forKey: "hour")
+            userDefaults!.set(minute.string(from: getDate.date), forKey: "minute")
+            let alert = UIAlertController(title: "メッセージ", message: "設定しました。", preferredStyle: UIAlertController.Style.alert)
+            let okayButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil)
+            alert.addAction(okayButton)
+            present(alert, animated: true, completion: nil)
+        }
     }
 
 }

@@ -14,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     @IBOutlet weak var getDate: UIDatePicker!
+    @IBOutlet weak var willContent: UITextField!
+    @IBOutlet weak var schedule: UILabel!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -27,31 +29,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // アプリケーションがバックグラウンドへ遷移した場合の処理
     func applicationDidEnterBackground(_ application: UIApplication) {
-        //　通知設定に必要なクラスをインスタンス化
-        var trigger: UNNotificationTrigger
-        let content = UNMutableNotificationContent()
-        var notificationTime = DateComponents()
-        let userDefaults = UserDefaults.standard
-
-        // userDefaultsで保存した値の取得
-        if let hour = userDefaults.string(forKey: "hour") {
-            notificationTime.hour = Int(hour)
+        // nilを許容する為の変数を用意（テキスト値の空判定をする為）
+        var textValue:String? = nil
+        // テキストが空の状態で、アプリを閉じた時に、この行でエラー
+        textValue = String((willContent.text ?? nil)!)
+        if (textValue != "") {
+            //　通知設定に必要なクラスをインスタンス化
+            var trigger: UNNotificationTrigger
+            let content = UNMutableNotificationContent()
+            var notificationTime = DateComponents()
+            let userDefaults = UserDefaults.standard
+            
+            // userDefaultsで保存した値の取得
+            if let hour = userDefaults.string(forKey: "hour") {
+                notificationTime.hour = Int(hour)
+            }
+            
+            if let minute = userDefaults.string(forKey: "minute") {
+                notificationTime.minute = Int(minute)
+            }
+            
+            trigger = UNCalendarNotificationTrigger(dateMatching: notificationTime, repeats: false)
+            // 通知内容の設定
+            content.title = "通知"
+            content.body = willContent.text!
+            // 通知音の設定
+            content.sound = UNNotificationSound(named:UNNotificationSoundName(rawValue: "b1-001_alarm-clock_01.mp3"))
+            // 通知スタイルを指定
+            let request = UNNotificationRequest(identifier: "uuid", content: content, trigger: trigger)
+            // 通知をセット(登録)
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         }
-
-        if let minute = userDefaults.string(forKey: "minute") {
-            notificationTime.minute = Int(minute)
-        }
-
-        trigger = UNCalendarNotificationTrigger(dateMatching: notificationTime, repeats: false)
-        // 通知内容の設定
-        content.title = ""
-        content.body = "時間です！！"
-        // 通知音の設定
-        content.sound = UNNotificationSound(named:UNNotificationSoundName(rawValue: "b1-001_alarm-clock_01.mp3"))
-        // 通知スタイルを指定
-        let request = UNNotificationRequest(identifier: "uuid", content: content, trigger: trigger)
-        // 通知をセット(登録)
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
