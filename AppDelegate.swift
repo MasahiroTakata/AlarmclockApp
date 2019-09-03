@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // nilを許容する為の変数を用意（テキスト値の空判定をする為）
         var textValue:String? = nil
         // テキストが空の状態で、アプリを閉じた時に、この行でエラー
-        textValue = String((willContent.text ?? nil)!)
+        textValue = String(willContent.text!)
         if (textValue != "") {
             //　通知設定に必要なクラスをインスタンス化
             var trigger: UNNotificationTrigger
