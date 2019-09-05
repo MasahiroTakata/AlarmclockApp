@@ -32,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // nilを許容する為の変数を用意（テキスト値の空判定をする為）
         var textValue:String? = nil
         textValue = String(willContent?.text! ?? "")
+        // 下記のコードもエラー
+        print("うぃるこんてんと：" + willContent.text!)
         
         if (textValue != nil) {
             //　通知設定に必要なクラスをインスタンス化

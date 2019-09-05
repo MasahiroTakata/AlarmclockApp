@@ -49,8 +49,6 @@ class ViewController: UIViewController {
             let userDefaults : UserDefaults? = UserDefaults.standard
             hour.dateFormat = "HH"
             minute.dateFormat = "mm"
-            //        print("時間：" , "\(hour.string(from: date))")
-            //        print("分：" , "\(minute.string(from: date))")
             userDefaults!.set(hour.string(from: getDate.date), forKey: "hour")
             userDefaults!.set(minute.string(from: getDate.date), forKey: "minute")
             let alert = UIAlertController(title: "メッセージ", message: "設定しました。", preferredStyle: UIAlertController.Style.alert)
