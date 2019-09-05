@@ -37,7 +37,7 @@ class ViewController: UIViewController {
     @IBAction func saveInformation(_ sender: Any) {
         // nilを許容する為の変数を用意（テキスト値の空判定をする為）
         var textValue:String? = nil
-        textValue = String(willContent.text?)
+        textValue = String((willContent.text!))
         if (textValue == "") {
             let alert = UIAlertController(title: "メッセージ", message: schedule.text! + "が未入力です。", preferredStyle: UIAlertController.Style.alert)
             let okayButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil)

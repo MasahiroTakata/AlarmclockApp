@@ -31,15 +31,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // nilを許容する為の変数を用意（テキスト値の空判定をする為）
         var textValue:String? = nil
-        // テキストが空の状態で、アプリを閉じた時に、この行でエラー
-        textValue = String(willContent.text!)
-        if (textValue != "") {
+        textValue = String(willContent?.text! ?? "")
+        
+        if (textValue != nil) {
             //　通知設定に必要なクラスをインスタンス化
             var trigger: UNNotificationTrigger
             let content = UNMutableNotificationContent()
             var notificationTime = DateComponents()
             let userDefaults = UserDefaults.standard
-            
+
             // userDefaultsで保存した値の取得
             if let hour = userDefaults.string(forKey: "hour") {
                 notificationTime.hour = Int(hour)
@@ -49,10 +49,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 notificationTime.minute = Int(minute)
             }
             
+            // 現状、変数に値が入っていない
+            print("内容：" + textValue!)
             trigger = UNCalendarNotificationTrigger(dateMatching: notificationTime, repeats: false)
             // 通知内容の設定
             content.title = "通知"
-            content.body = willContent.text!
+            content.body = textValue! // これでnilではない事を保証している
             // 通知音の設定
             content.sound = UNNotificationSound(named:UNNotificationSoundName(rawValue: "b1-001_alarm-clock_01.mp3"))
             // 通知スタイルを指定
