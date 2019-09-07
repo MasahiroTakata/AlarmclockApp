@@ -24,6 +24,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // 通知の許可
         let center = UNUserNotificationCenter.current()
+        
         center.requestAuthorization(options: [.alert, .sound, .badge]) {
             (granted, error) in
             if granted {
@@ -31,6 +32,17 @@ class ViewController: UIViewController {
                 center.delegate = self as? UNUserNotificationCenterDelegate
             }
         }
+        
+        // 現在日付を取得
+        let now = NSDate()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        let nowTime = formatter.string(from: now as Date)
+        print("日付：" + nowTime)
+// UIDatePickerの時間の最小値を現在時刻に設定
+//        let minDateString = "2014-12-01"
+//        var dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "YYYY-MM-DD"
     }
 
     // 設定情報を保存するメソッド
@@ -51,6 +63,8 @@ class ViewController: UIViewController {
             minute.dateFormat = "mm"
             userDefaults!.set(hour.string(from: getDate.date), forKey: "hour")
             userDefaults!.set(minute.string(from: getDate.date), forKey: "minute")
+            userDefaults!.set(textValue, forKey: "content")
+            // ダイアログの設定
             let alert = UIAlertController(title: "メッセージ", message: "設定しました。", preferredStyle: UIAlertController.Style.alert)
             let okayButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil)
             alert.addAction(okayButton)
