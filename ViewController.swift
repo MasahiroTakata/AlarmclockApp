@@ -39,10 +39,12 @@ class ViewController: UIViewController {
         formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
         let nowTime = formatter.string(from: now as Date)
         print("日付：" + nowTime)
-// UIDatePickerの時間の最小値を現在時刻に設定
-//        let minDateString = "2014-12-01"
-//        var dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "YYYY-MM-DD"
+        // UIDatePickerの時間の最小値を現在時刻に設定
+        let minDateString = "2014-12-01"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-DD"
+        let minDate = dateFormatter.date(from: minDateString)
+        getDate.minimumDate = minDate
     }
 
     // 設定情報を保存するメソッド
@@ -64,6 +66,11 @@ class ViewController: UIViewController {
             userDefaults!.set(hour.string(from: getDate.date), forKey: "hour")
             userDefaults!.set(minute.string(from: getDate.date), forKey: "minute")
             userDefaults!.set(textValue, forKey: "content")
+            
+//            var test:String? = nil
+//            test = String(getDate.date)
+//            // 選択した日付と時間を取得する
+//            print("取得した日付：" + )
             // ダイアログの設定
             let alert = UIAlertController(title: "メッセージ", message: "設定しました。", preferredStyle: UIAlertController.Style.alert)
             let okayButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil)
