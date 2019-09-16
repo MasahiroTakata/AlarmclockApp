@@ -40,13 +40,17 @@ class ViewController: UIViewController {
 //        let nowTime = formatter.string(from: now as Date)
 //        print("日付：" + nowTime)
         // UIDatePickerの時間の最小値を現在時刻に設定
-        let minDateString = "2019-08-16"
+        let minDateString = "2019-09-16"
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-DD"
         let minDate = dateFormatter.date(from: minDateString)
+        // タイムゾーンの設定
+        getDate.timeZone = NSTimeZone.local
+        getDate.locale = Locale.current
+        // 時間軸の設定？？（東京に合わせるのか？とか）
         getDate.minimumDate = minDate
         // maximumDateだと反応があった。ただ、指定した月ではなかったが。
-//      getDate.maximumDate = minDate
+        // getDate.maximumDate = minDate
 //        print("日付：" + minDate)
     }
 
