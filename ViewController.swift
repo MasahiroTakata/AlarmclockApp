@@ -18,6 +18,7 @@ import UserNotifications // 通知の為のフレームワーク
 class ViewController: UIViewController {
     @IBOutlet weak var getDate: UIDatePicker!
     @IBOutlet weak var willContent: UITextField!
+    @IBOutlet weak var scheduleText: UITextField!
     @IBOutlet weak var schedule: UILabel!
 
     override func viewDidLoad() {
@@ -40,18 +41,21 @@ class ViewController: UIViewController {
 //        let nowTime = formatter.string(from: now as Date)
 //        print("日付：" + nowTime)
         // UIDatePickerの時間の最小値を現在時刻に設定
-        let minDateString = "2019-09-16"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-DD"
-        let minDate = dateFormatter.date(from: minDateString)
+//        let minDateString = "2019/09/16 20:00:00"
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "YYYY/MM/DD HH:MM:SS"
+//        let minDate = dateFormatter.date(from: minDateString)
+//        print("最小日付：" + minDate)
         // タイムゾーンの設定
-        getDate.timeZone = NSTimeZone.local
-        getDate.locale = Locale.current
+//        getDate.timeZone = NSTimeZone.local
+//        getDate.locale = Locale.current
         // 時間軸の設定？？（東京に合わせるのか？とか）
-        getDate.minimumDate = minDate
+//        getDate.minimumDate = minDate
         // maximumDateだと反応があった。ただ、指定した月ではなかったが。
         // getDate.maximumDate = minDate
 //        print("日付：" + minDate)
+        
+        // 定数scheduleTextで時刻選択ドラムロールを設定する
     }
 
     // 設定情報を保存するメソッド
