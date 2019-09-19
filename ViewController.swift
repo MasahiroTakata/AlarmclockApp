@@ -34,6 +34,18 @@ class ViewController: UIViewController {
             }
         }
         
+        // 変数の定義
+        let datePicker: UIDatePicker = {
+            let dp = UIDatePicker()
+            dp.datePickerMode = UIDatePicker.Mode.dateAndTime
+            dp.timeZone = NSTimeZone.local
+            dp.locale = Locale.current
+            
+            return dp
+        }()
+        
+        scheduleText.inputView = datePicker
+
         // 現在日付を取得
 //        let now = NSDate()
 //        let formatter = DateFormatter()
