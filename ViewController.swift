@@ -18,7 +18,6 @@ import UserNotifications // 通知の為のフレームワーク
 class ViewController: UIViewController {
     @IBOutlet weak var getDate: UIDatePicker!
     @IBOutlet weak var willContent: UITextField!
-    @IBOutlet weak var scheduleText: UITextField!
     @IBOutlet weak var schedule: UILabel!
 
     override func viewDidLoad() {
@@ -34,18 +33,6 @@ class ViewController: UIViewController {
             }
         }
         
-        // 変数の定義
-        let datePicker: UIDatePicker = {
-            let dp = UIDatePicker()
-            dp.datePickerMode = UIDatePicker.Mode.dateAndTime
-            dp.timeZone = NSTimeZone.local
-            dp.locale = Locale.current
-            
-            return dp
-        }()
-        
-        scheduleText.inputView = datePicker
-
         // 現在日付を取得
 //        let now = NSDate()
 //        let formatter = DateFormatter()
@@ -89,14 +76,6 @@ class ViewController: UIViewController {
             userDefaults!.set(hour.string(from: getDate.date), forKey: "hour")
             userDefaults!.set(minute.string(from: getDate.date), forKey: "minute")
             userDefaults!.set(textValue, forKey: "content")
-            
-            var test:String? = nil
-            // 日付型をString型に変換する
-            let dateFormatter = DateFormatter()
-            dateFormatter.calendar = Calendar(identifier: .gregorian)
-            dateFormatter.dateFormat = "yyyy年MM月dd日 HH時mm分"
-            test = dateFormatter.string(from: getDate.date as Date)
-            print("取得した日付：" + test!)
             // ダイアログの設定
             let alert = UIAlertController(title: "メッセージ", message: "設定しました。", preferredStyle: UIAlertController.Style.alert)
             let okayButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil)
