@@ -9,12 +9,6 @@
 import UIKit
 import UserNotifications // 通知の為のフレームワーク
 
-// クラスの拡張
-//extension (UIDatePicker) {
-//    func test(){
-//    }
-//}
-
 class ViewController: UIViewController {
     @IBOutlet weak var getDate: UIDatePicker!
     @IBOutlet weak var willContent: UITextField!
